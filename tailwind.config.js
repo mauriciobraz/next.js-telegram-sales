@@ -11,7 +11,7 @@ module.exports = {
       // Fonts are being loaded on `src/pages/_document.tsx`, so if you want to
       // change the font, you need to change the url there and name here.
       fontFamily: {
-        sans: ['Roboto', ...defaultTheme.fontFamily.sans],
+        sans: ['Ubuntu', ...defaultTheme.fontFamily.sans],
         mono: ['Roboto Mono', ...defaultTheme.fontFamily.mono],
       },
       colors: {
