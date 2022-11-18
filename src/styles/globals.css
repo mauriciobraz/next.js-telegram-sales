@@ -14,6 +14,6 @@
   }
 
   html {
-    @apply font-sans;
+    @apply font-sans bg-[#161616];
   }
 }

@@ -2,6 +2,7 @@ import '../styles/globals.css';
 
 import type { AppProps } from 'next/app';
 import { RecoilRoot } from 'recoil';
+import Transition from '../components/Transition';
 
 function MyApp({ Component, pageProps }: AppProps) {
   // const [isHashValid, setIsHashValid] = useState(false);
@@ -21,7 +22,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <RecoilRoot>
-      <Component {...pageProps} />
+      <Transition>
+        <Component {...pageProps} />
+      </Transition>
     </RecoilRoot>
   );
 }
