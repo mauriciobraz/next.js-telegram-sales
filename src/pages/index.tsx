@@ -18,12 +18,12 @@ const Home: NextPage<Props> = ({ data }) => {
   }, [data, setProducts]);
 
   return (
-    <div className="flex flex-col items-center min-h-screen py-6 bg-[#161616]">
+    <div className="flex min-h-screen flex-col items-center bg-[#161616] py-6">
       <h1 className="pb-2 text-2xl font-bold text-white">
         Choose Your Preferred Service
       </h1>
 
-      <div className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full max-w-6xl mt-4 px-6">
+      <div className="mt-4 grid w-full max-w-6xl grid-cols-1 gap-4 px-6 md:grid-cols-2 lg:grid-cols-3">
         {data.map(product => (
           <Product
             key={product.id}

@@ -68,14 +68,14 @@ const Service: React.FC<Props> = ({ service }) => {
   }
 
   return (
-    <div className="flex justify-between bg-[#222222] rounded-lg shadow-lg p-4 w-full">
+    <div className="flex w-full justify-between rounded-lg bg-[#222222] p-4 shadow-lg">
       <div className="flex flex-col items-start justify-center">
         <h2 className="text-lg font-extrabold text-white">{service.title}</h2>
-        <p className="text-sm text-gray-100 mr-2">{service.description}</p>
+        <p className="mr-2 text-sm text-gray-100">{service.description}</p>
       </div>
 
       <div className="flex flex-col items-end justify-center">
-        <p className="text-sm text-yellow-300 font-bold">€ {service.price}</p>
+        <p className="text-sm font-bold text-yellow-300">€ {service.price}</p>
 
         {!serviceInCart?.quantity && (
           <ServiceButton
@@ -95,7 +95,7 @@ const Service: React.FC<Props> = ({ service }) => {
               -
             </ServiceButton>
 
-            <p className="px-2 py-0.5 text-white font-bold">
+            <p className="px-2 py-0.5 font-bold text-white">
               {serviceInCart.quantity}
             </p>
 

@@ -77,20 +77,20 @@ const Cart: NextPage = () => {
   const handleCloseModal = createToggleModal(false);
 
   return (
-    <div className="flex flex-col items-center min-h-screen py-6 bg-[#161616]">
+    <div className="flex min-h-screen flex-col items-center bg-[#161616] py-6">
       <header className="flex flex-row items-center">
         <ArrowBackSvg
-          className="w-8 h-8 left-6 absolute hover:cursor-pointer focus:outline-none"
+          className="absolute left-6 h-8 w-8 hover:cursor-pointer focus:outline-none"
           colors={['#22c55e', '#39B34B']}
           onClick={() => router.back()}
         />
 
-        <h1 className="pb-2 text-2xl font-bold text-white text-center">
+        <h1 className="pb-2 text-center text-2xl font-bold text-white">
           Confirm Order
         </h1>
       </header>
 
-      <main className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full max-w-6xl mt-4 px-6 mb-28 scroll-smooth">
+      <main className="mt-4 mb-28 grid w-full max-w-6xl grid-cols-1 gap-4 scroll-smooth px-6 md:grid-cols-2 lg:grid-cols-3">
         {cartWithProducts.products.map(product => (
           <ConfirmationService
             key={product.id}
@@ -98,14 +98,14 @@ const Cart: NextPage = () => {
           />
         ))}
 
-        <div className="fixed flex flex-col place-content-end inset-0 mt-auto px-4 py-4 space-y-4 h-40 bg-gradient-to-t from-[#161616] via-[#161616]">
+        <div className="fixed inset-0 mt-auto flex h-40 flex-col place-content-end space-y-4 bg-gradient-to-t from-[#161616] via-[#161616] p-4">
           <h1 className="mx-1 select-none text-base font-bold text-white">
             Grand Total{' '}
             <span className="float-right">€ {cartDetails.total}</span>
           </h1>
 
           <button
-            className="w-full py-2 px-4 rounded font-bold text-white bg-[#22c55e] disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full rounded bg-[#22c55e] py-2 px-4 font-bold text-white disabled:cursor-not-allowed disabled:opacity-50"
             onClick={handleOpenModal}
             disabled
           >

@@ -37,8 +37,8 @@ const Products: NextPage = () => {
 
   if (!product) {
     return (
-      <div className="grid place-items-center h-screen px-4">
-        <h1 className="text-2xl font-bold text-center">
+      <div className="grid h-screen place-items-center px-4">
+        <h1 className="text-center text-2xl font-bold">
           Product not found, make sure you have the correct link.
         </h1>
       </div>
@@ -46,20 +46,20 @@ const Products: NextPage = () => {
   }
 
   return (
-    <div className="flex flex-col items-center min-h-screen py-6 bg-[#161616]">
+    <div className="flex min-h-screen flex-col items-center bg-[#161616] py-6">
       <header className="flex flex-row items-center">
         <ArrowBackSvg
-          className="w-8 h-8 left-6 absolute hover:cursor-pointer focus:outline-none"
+          className="absolute left-6 h-8 w-8 hover:cursor-pointer focus:outline-none"
           colors={['#22c55e', '#39B34B']}
           onClick={() => router.back()}
         />
 
-        <h1 className="pb-2 text-2xl font-bold text-white text-center">
+        <h1 className="pb-2 text-center text-2xl font-bold text-white">
           {product.title}
         </h1>
       </header>
 
-      <main className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full max-w-6xl mt-4 px-6">
+      <main className="mt-4 grid w-full max-w-6xl grid-cols-1 gap-4 px-6 md:grid-cols-2 lg:grid-cols-3">
         {product.services.map(service => (
           <Service key={service.id} service={service} />
         ))}

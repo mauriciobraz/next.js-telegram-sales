@@ -11,7 +11,7 @@ type Props = {
 const Product: React.FC<Props> = ({ product, onClick }) => {
   return (
     <div
-      className="flex flex-row items-center bg-[#222222] rounded-lg shadow-lg p-4 w-full gap-4 hover:cursor-pointer"
+      className="flex w-full flex-row items-center gap-4 rounded-lg bg-[#222222] p-4 shadow-lg hover:cursor-pointer"
       onClick={onClick}
     >
       <Image
@@ -23,12 +23,12 @@ const Product: React.FC<Props> = ({ product, onClick }) => {
 
       <div className="flex flex-col items-start justify-center">
         <h2 className="text-lg font-extrabold text-white">{product.title}</h2>
-        <p className="text-sm text-gray-100 font-medium">
+        <p className="text-sm font-medium text-gray-100">
           {product.description}
         </p>
       </div>
 
-      <ServiceButton className="ml-auto py-1 from-[#22c55e] to-[#39B34B]">
+      <ServiceButton className="ml-auto from-[#22c55e] to-[#39B34B] py-1">
         CHOOSE
       </ServiceButton>
     </div>
