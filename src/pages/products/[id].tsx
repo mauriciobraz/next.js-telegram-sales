@@ -17,12 +17,23 @@ const Products: NextPage = () => {
   const product = products?.find(product => product.id === router.query.id);
 
   useEffect(() => {
-    window.Telegram.WebApp.MainButton.color = '#22c55e';
-    window.Telegram.WebApp.MainButton.text = `Checkout (€ ${cartDetails.total})`;
+    if (!window.Telegram.WebApp.isExpanded) {
+      window.Telegram.WebApp.expand();
+    }
 
+    window.Telegram.WebApp.MainButton.color = '#22c55e';
+    window.Telegram.WebApp.MainButton.text =
+      cartDetails.total > 0
+        ? `Checkout (€ ${cartDetails.total})`
+        : 'Choose any product to checkout';
+
+    window.Telegram.WebApp.MainButton.isVisible = true;
     window.Telegram.WebApp.MainButton.isActive = cartDetails.total > 0;
-    window.Telegram.WebApp.MainButton.isVisible = cartDetails.total > 0;
-  }, [cartDetails.total]);
+
+    window.Telegram.WebApp.onEvent('mainButtonClicked', () => {
+      router.push('/cart');
+    });
+  }, [cartDetails.total, router]);
 
   if (!product) {
     return (
@@ -38,7 +49,7 @@ const Products: NextPage = () => {
     <div className="flex flex-col items-center min-h-screen py-6 bg-[#161616]">
       <header className="flex flex-row items-center">
         <ArrowBackSvg
-          className="w-8 h-8 left-6 absolute hover:cursor-pointer"
+          className="w-8 h-8 left-6 absolute hover:cursor-pointer focus:outline-none"
           colors={['#22c55e', '#39B34B']}
           onClick={() => router.back()}
         />
