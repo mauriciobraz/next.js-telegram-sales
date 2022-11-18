@@ -44,7 +44,7 @@ type StaticProps = {
 
 export const getStaticProps: GetStaticProps<StaticProps> = async () => {
   const { data } = await API.get<APIProduct[]>(
-    process.env.API_CUSTOM_PRODUCTS_ENDPOINT ?? 'products'
+    process.env.API_ENDPOINT_PRODUCTS ?? 'products'
   );
 
   return {
