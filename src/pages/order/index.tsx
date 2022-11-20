@@ -7,6 +7,7 @@ import { FiCopy } from "react-icons/fi";
 import dedent from "ts-dedent";
 import { useRecoilState } from "recoil";
 
+import Toast from "../../components/Toast";
 import orderAtom from "../../atoms/order";
 import useWindowSize from "../../hooks/useWindowSize";
 import TrianglesListSvg from "../../assets/TrianglesList";
@@ -14,11 +15,6 @@ import TrianglesListSvg from "../../assets/TrianglesList";
 const OrderDetails: NextPage = () => {
   const { height, width } = useWindowSize();
   const [order] = useRecoilState(orderAtom);
-  // const order = {
-  //   amount: 100,
-  //   orderId: "123456789",
-  //   txId: "123456789",
-  // };
 
   const handleCopyDetails: MouseEventHandler<HTMLSpanElement> = (event) => {
     if (!order) return;
@@ -29,8 +25,10 @@ const OrderDetails: NextPage = () => {
     💳 Transaction ID: ${order.txId}
   `);
 
-    // TODO: Use a toast to show that the details were copied.
-    alert("Your order details have been copied to your clipboard!");
+    Toast.notify({
+      duration: 5000,
+      message: "Your order details have been copied to your clipboard!",
+    });
   };
 
   if (!order) {
@@ -119,8 +117,10 @@ const OrderDetails: NextPage = () => {
                   onClick={() => {
                     navigator.clipboard.writeText(value.toString());
 
-                    // TODO: Use a toast to show that the details were copied.
-                    alert(`${key} has been copied to your clipboard!`);
+                    Toast.notify({
+                      duration: 5000,
+                      message: `${key} has been copied to your clipboard!`,
+                    });
                   }}
                 />
               </div>

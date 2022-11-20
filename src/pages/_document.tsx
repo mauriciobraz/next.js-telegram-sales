@@ -1,5 +1,5 @@
-import { Html, Head, Main, NextScript } from 'next/document';
-import Script from 'next/script';
+import { Html, Head, Main, NextScript } from "next/document";
+import Script from "next/script";
 
 function MyDocument() {
   return (
@@ -19,6 +19,8 @@ function MyDocument() {
       <body>
         <Main />
         <NextScript />
+
+        <div id="toast" className="fixed left-0 bottom-5 w-full"></div>
       </body>
     </Html>
   );
