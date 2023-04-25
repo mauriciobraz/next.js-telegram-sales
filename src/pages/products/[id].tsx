@@ -9,9 +9,11 @@ import productsAtom from "../../atoms/products";
 import Service from "../../components/Service";
 import API from "../../constants/api";
 import cartDetailsSelector from "../../selectors/cart-details";
+import useTelegramInitData from "../../hooks/useTelegramInitData";
 
 const Products: NextPage = () => {
   const router = useRouter();
+  const initData = useTelegramInitData();
 
   const cartDetails = useRecoilValue(cartDetailsSelector);
   const [products] = useRecoilState(productsAtom);
@@ -35,7 +37,11 @@ const Products: NextPage = () => {
 
     window.Telegram.WebApp.onEvent("mainButtonClicked", () => {
       // TODO: Test this (API is down right now).
-      API.post(process.env.API_ENDPOINT_POST_ORDER + "/order")
+      API.post(process.env.API_ENDPOINT_POST_ORDER + "/order", {
+        user_id: initData.user?.id,
+        web_query_id: initData.query_id,
+        products: products,
+      })
         .then((response) => {
           setOrder({
             orderId: response.data["order_id"] ?? "<ORDER_ID>",

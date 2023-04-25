@@ -1,21 +1,15 @@
-import { useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { useRouter } from 'next/router';
-import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
+import type { NextPage } from "next";
+import { useRouter } from "next/router";
+import { useRecoilValue } from "recoil";
 
-import API from '../constants/api';
-import Product from '../components/Product';
-import productsAtom, { APIProduct } from '../atoms/products';
+import productsAtom from "../atoms/products";
+import Product from "../components/Product";
 
-type Props = InferGetStaticPropsType<typeof getStaticProps>;
+// type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
-const Home: NextPage<Props> = ({ data }) => {
-  const setProducts = useSetRecoilState(productsAtom);
+const Home: NextPage = () => {
+  const data = useRecoilValue(productsAtom)!;
   const router = useRouter();
-
-  useEffect(() => {
-    setProducts(data);
-  }, [data, setProducts]);
 
   return (
     <div className="flex min-h-screen flex-col items-center bg-[#161616] py-6">
@@ -24,7 +18,7 @@ const Home: NextPage<Props> = ({ data }) => {
       </h1>
 
       <div className="mt-4 grid w-full max-w-6xl grid-cols-1 gap-4 px-6 md:grid-cols-2 lg:grid-cols-3">
-        {data.map(product => (
+        {data.map((product) => (
           <Product
             key={product.id}
             product={product}
@@ -38,18 +32,18 @@ const Home: NextPage<Props> = ({ data }) => {
 
 export default Home;
 
-type StaticProps = {
-  data: APIProduct[];
-};
+// type StaticProps = {
+//   data: APIProduct[];
+// };
 
-export const getStaticProps: GetStaticProps<StaticProps> = async () => {
-  const { data } = await API.get<APIProduct[]>(
-    process.env.API_ENDPOINT_PRODUCTS ?? 'products'
-  );
+// export const getStaticProps: GetStaticProps<StaticProps> = async () => {
+//   const { data } = await API.get<APIProduct[]>(
+//     process.env.API_ENDPOINT_PRODUCTS ?? "products"
+//   );
 
-  return {
-    props: {
-      data,
-    },
-  };
-};
+//   return {
+//     props: {
+//       data,
+//     },
+//   };
+// };

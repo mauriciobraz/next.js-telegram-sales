@@ -1,7 +1,7 @@
-import Image from 'next/image';
+import Image from "next/image";
 
-import ServiceButton from './shared/ServiceButton';
-import { APIProduct } from '../atoms/products';
+import ServiceButton from "./shared/ServiceButton";
+import { APIProduct } from "../atoms/products";
 
 type Props = {
   product: APIProduct;
@@ -15,8 +15,9 @@ const Product: React.FC<Props> = ({ product, onClick }) => {
       onClick={onClick}
     >
       <Image
+        className="rounded-md "
         src={`/images/${product.id}.png`}
-        alt={product.id}
+        alt="Product Image"
         width={44}
         height={44}
       />
