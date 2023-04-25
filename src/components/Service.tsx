@@ -1,8 +1,9 @@
-import { useRecoilState } from 'recoil';
+import { useRecoilState } from "recoil";
+import { FiPlus, FiMinus } from "react-icons/fi";
 
-import ServiceButton from './shared/ServiceButton';
-import cartAtom, { CartProduct } from '../atoms/cart';
-import { APIService } from '../atoms/products';
+import ServiceButton from "./shared/ServiceButton";
+import cartAtom, { CartProduct } from "../atoms/cart";
+import { APIService } from "../atoms/products";
 
 type Props = {
   service: APIService;
@@ -14,20 +15,20 @@ const Service: React.FC<Props> = ({ service }) => {
   const [cart, setCart] = useRecoilState(cartAtom);
 
   const serviceInCart = cart.productsIds.find(
-    product => product.id === service.id
+    (product) => product.id === service.id
   );
 
   function handleAddToCart(event: OnClickProps) {
     event.preventDefault();
 
-    setCart(oldCart => {
+    setCart((oldCart) => {
       const newProductsIds: CartProduct[] = [];
 
       // If the service is already in the cart, we just increment the quantity.
       // Otherwise, we add it to the cart with a quantity of 1.
-      if (oldCart.productsIds.some(product => product.id === service.id)) {
+      if (oldCart.productsIds.some((product) => product.id === service.id)) {
         newProductsIds.push(
-          ...oldCart.productsIds.map(product =>
+          ...oldCart.productsIds.map((product) =>
             product.id === service.id
               ? { ...product, quantity: product.quantity + 1 }
               : product
@@ -51,14 +52,14 @@ const Service: React.FC<Props> = ({ service }) => {
   function handleRemoveFromCart(event: OnClickProps) {
     event.preventDefault();
 
-    setCart(oldCart => {
+    setCart((oldCart) => {
       const newProductsIds = oldCart.productsIds
-        .map(product =>
+        .map((product) =>
           product.id === service.id
             ? { ...product, quantity: product.quantity - 1 }
             : product
         )
-        .filter(product => product.quantity > 0);
+        .filter((product) => product.quantity > 0);
 
       return {
         ...oldCart,
@@ -69,12 +70,12 @@ const Service: React.FC<Props> = ({ service }) => {
 
   return (
     <div className="flex w-full justify-between rounded-lg bg-[#222222] p-4 shadow-lg">
-      <div className="flex flex-col items-start justify-center">
+      <div className="flex flex-1 flex-col items-start justify-center">
         <h2 className="text-lg font-extrabold text-white">{service.title}</h2>
         <p className="mr-2 text-sm text-gray-100">{service.description}</p>
       </div>
 
-      <div className="flex flex-col items-end justify-center">
+      <div className="flex flex-col items-end justify-between">
         <p className="text-sm font-bold text-yellow-300">€ {service.price}</p>
 
         {!serviceInCart?.quantity && (
@@ -87,12 +88,12 @@ const Service: React.FC<Props> = ({ service }) => {
         )}
 
         {serviceInCart?.quantity && (
-          <div className="flex flex-row items-center justify-center">
+          <div className="flex min-w-full flex-row items-center justify-between text-xs">
             <ServiceButton
               className="from-[#EB4949] to-[#D74141]"
               onClick={handleRemoveFromCart}
             >
-              -
+              <FiMinus />
             </ServiceButton>
 
             <p className="px-2 py-0.5 font-bold text-white">
@@ -103,7 +104,7 @@ const Service: React.FC<Props> = ({ service }) => {
               className="from-[#22c55e] to-[#39B34B]"
               onClick={handleAddToCart}
             >
-              +
+              <FiPlus />
             </ServiceButton>
           </div>
         )}
